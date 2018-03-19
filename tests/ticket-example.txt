@@ -1,0 +1,50 @@
+CDC 00000 POCS MM/DD/YY TT:TT:TT 20180180624-000 NEW XCAV RTN
+
+============PENNSYLVANIA UNDERGROUND UTILITY LINE PROTECTION REQUEST============
+Serial Number--[20180180624]-[000] Channel#--[0846A020][0247]
+Message Type--[NEW][EXCAVATION][ROUTINE]
+
+County--[ALLEGHENY] Municipality--[KILBUCK TWP]
+Work Site--[237 CHURCH AVE]
+Nearest Intersection--[BRYSON AVE]
+Second Intersection--[PENNSYLVANIA AVE]
+At Intersection--[N] Between Intersections--[Y] Site Marked in White--[Y]
+Subdivision--[]
+Location Information--
+[SITE IS AT THE END OF CHURCH AVE. TAPPING OFF OF MAIN ON PENNSYLVANIA IN
+EMSWORTH]
+Caller Lat/Lon--[]
+Mapped Type--[P] Mapped Lat/Lon--
+[40.515107/-80.098393,40.514385/-80.098096,40.514060/-80.098619,
+40.514241/-80.100043,40.514818/-80.100791,40.515693/-80.100767]
+Attachments--[http://www.pa811.org/attachments/20180180624]
+Type of Work--[INSTALLATION OF NEW SHORT WATER SERVICE] Depth--[6FT]
+Extent of Excavation--[5FT X 5FT] Method of Excavation--[DIGGING]
+Equip Type--[BACKHOE]
+Street--[X] Sidewalk--[X] Pub Prop--[X] Pvt Prop--[ ] Other--[CURB]
+Private Front--[ ] Rear--[ ] Left--[ ] Right--[ ]
+
+Lawful Start Dates--[23-Jan-18] thru [01-Feb-18] Response Due Date--[22-Jan-18]
+Scheduled Excavation Date--[23-Jan-18] Dig Time--[0800] Duration--[1 DAY]
+
+Caller--[SARA CALORE]
+Caller Phone--[412-931-3292] Caller Ext--[]
+Excavator--[WEST VIEW WATER AUTHORITY]
+Address--[2428 ROCHESTER RD]
+City--[SEWICKLEY] State--[PA] Zip--[15143]
+FAX--[412-364-9010] Caller Type--[B]
+Email--[SCALORE@WVWAUTHORITY.COM]
+Work For--[WVWA]
+Person to Contact--[SARA CALORE]
+Contact Phone--[412-931-3292] Contact Ext--[3230]
+Best Time to Call--[ANYTIME]
+
+Prepared--[18-Jan-18] at [0850] by [DENISE DESIDERIO]
+Remarks--
+[]
+
+DC 0 DC =DUQ LIGHT PGH KIL0 KIL=KILBUCK TWP LT 0 LT =COL GAS ROCHEST
+PNZ0 PNZ=SHELL APPALACH WX 0 WX =WVWA
+
+Serial Number--[20180180624]-[000]
+========== Copyright (c) 2018 by Pennsylvania One Call System, Inc. ==========
