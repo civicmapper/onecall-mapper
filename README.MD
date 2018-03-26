@@ -1,6 +1,8 @@
 # PA OneCall Mapper *alpha/demo*
 
-[PA OneCall](http://www.pa1call.org/PA811/Public/) has an e-mail-based notification system that will alert you of "Call Before you Dig" requests in your area (*note: CivicMapper is not affiliated with or contracted by PA OneCall*)  As an approved subscriber (i.e., you have to request approval from PA OneCall), you can receive the occasional e-mail from them that looks like this:
+[PA OneCall](http://www.pa1call.org/PA811/Public/) has an e-mail-based notification system that will alert you of "Call Before you Dig" requests in your area (*note: CivicMapper is not affiliated with or contracted by PA OneCall*). 
+
+As an approved subscriber (i.e., you have to request approval from PA OneCall to get these notices), you can receive the occasional e-mail from them that looks like this:
 
 ```
 CDC 00000 POCS MM/DD/YY TT:TT:TT 20180000000-000 NEW XCAV RTN
@@ -60,13 +62,11 @@ Serial Number--[20180651231]-[000]
 ========== Copyright (c) 2018 by Pennsylvania One Call System, Inc. ==========
 ```
 
-This set of scripts will can take a PA One Call e-mails and publish them to a standard geodata web service endpoint so the tickets can be viewed on a web map.
+This set of scripts will can take a PA One Call e-mails and publish them to a standard geodata web service endpoint so the tickets can be viewed on a web map. Currently:
 
-Currently:
-
-* it only parses and publishes the request Serial Number, Mapped Type, and Mapped Lat/Lon information from the ticket; other information could be parsed and stored with it, or linked via a related table in the published service
-* it checks what has been published already, and so won't re-publish/duplicate old tickets if the inbox gets messy
-* only Esri AGOL Feature Services are supported as endpoints; however it would be trivial to store and publish the data in other formats, (e.g., a csv or geojson in a GitHub repository, a table in CARTO, etc.)
+* it only parses and publishes the request Serial Number, Mapped Type, and Mapped Lat/Lon information from the ticket; other information could easily be parsed and stored as well
+* it checks what has been published already, and so won't re-publish/duplicate old tickets (if the inbox gets messy)
+* only Esri AGOL Feature Services are supported as endpoints right now; however it would be trivial to store and publish the data in other formats, (e.g., a `csv` or `geojson` in a GitHub repository, a table in CARTO, etc.)
 
 For now, this is just an experiment and technology demo; CivicMapper is not affiliated with or contracted by PA OneCall.
 
