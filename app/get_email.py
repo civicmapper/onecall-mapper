@@ -133,17 +133,18 @@ class FromIMAPMail(Utils):
 
             result, data = server.uid(
                 'fetch', str(uid), '(RFC822)')  # fetch entire message
-            msg = email.message_from_string(data[0][1].decode())
+            if data and data[0]:
+                msg = email.message_from_string(data[0][1].decode())
 
-            # parse the email here:
-            mail = self._get_first_text_block(msg)
+                # parse the email here:
+                mail = self._get_first_text_block(msg)
 
-            # log.info(text)
-            # parse_email.go(text.split("\n"))
-            self.mails.append(mail)
+                # log.info(text)
+                # parse_email.go(text.split("\n"))
+                self.mails.append(mail)
 
-            # record the uid in the db here
-            # append_uids_to_log([uid])
+                # record the uid in the db here
+                # append_uids_to_log([uid])
 
         server.logout()
 
