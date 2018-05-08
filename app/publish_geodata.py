@@ -63,15 +63,17 @@ class Publish(Utils):
         )
         published = published.json()
         if "features" in published:
+            # this list of ids from the already published data:
+            published_ids = list(
+                set([str(f["attributes"]["SerialNumber"]) for f in published["features"]]))
+            # print("published", published_ids)
+            # print('records', self.records)
+            # compare records we've found in e-mail inbox to published features
             to_publish = [
                 # return each record
                 r for r in self.records
                 # but only if the id is not in
-                if str(r["serial_number"]) not in list(set(
-                    # this list of ids from the already published data:
-                    [str(f["attributes"]["SerialNumber"])
-                     for f in published["features"]]
-                ))
+                if str(r["serial_number"]) not in published_ids
             ]
             if to_publish:
                 return to_publish

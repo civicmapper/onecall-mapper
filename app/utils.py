@@ -8,9 +8,15 @@ from .logger import log
 class Utils(object):
 
     def list_of_seq_unique_by_key(self, seq, key):
-        seen = set()
-        seen_add = seen.add
-        return [x for x in seq if x[key] not in seen and not seen_add(x[key])]
+        # make sure spec'd key exists in provided records first
+        seq = [x for x in seq if key in x.keys()]
+        # create a list of unique keys from the records provided
+        if seq:
+            seen = set()
+            seen_add = seen.add
+            return [x for x in seq if x[key] not in seen and not seen_add(x[key])]
+        else:
+            return []
 
     def find_floats(self, string, lower=-180, upper=180):
         '''This will do its best to get a postive or negative float from a string

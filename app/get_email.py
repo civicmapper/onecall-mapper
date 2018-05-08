@@ -34,8 +34,8 @@ class FromIMAPMail(Utils):
         # Restrict mail search. Be very specific.
         # Machine should be very selective to receive messages.
         self.mail_search_criteria = {
-            'FROM': MAIL_FROM,
-            'SUBJECT': MAIL_SUBJECT
+            'FROM': MAIL_FROM
+            # 'SUBJECT': MAIL_SUBJECT
             # 'BODY': MAIL_BODY_SIGNATURE,
         }
 
@@ -87,14 +87,33 @@ class FromIMAPMail(Utils):
         return c
 
     def _get_first_text_block(self, msg):
-        type = msg.get_content_maintype()
-
-        if type == 'multipart':
+        t = msg.get_content_maintype()
+        if t == 'multipart':
             for part in msg.get_payload():
+                print(part.get_payload())
                 if part.get_content_maintype() == 'text':
                     return part.get_payload()
-        elif type == 'text':
+        elif t == 'text':
             return msg.get_payload()
+
+    def _get_first_html_block(self, msg):
+        t = msg.get_content_maintype()
+        if t == 'multipart':
+            for part in msg.walk():
+                # print(part)
+                ctype = part.get_content_type()
+                cdispo = str(part.get('Content-Disposition'))
+                if part.get('Date'):
+                    print("\t", str(part.get('Date')))
+                if part.get('Subject'):
+                    print("\t", str(part.get('Subject')))
+                # skip any text/plain (txt) attachments
+                if ctype == 'text/html' and 'attachment' not in cdispo:
+                    body = part.get_payload()  # decode
+                    # print(body)
+                    return body
+        # else:
+        #     print(msg)
 
     # ------------------------------------------------------
     # WORK
@@ -113,38 +132,43 @@ class FromIMAPMail(Utils):
         server.select(self.folder)
 
         # find messages in the INBOX meeting the search criteria
-        # result, data = server.uid('search', None, _imap_search_string(self.mail_search_criteria))
-        result, data = server.search(
+        result, data = server.uid(
+            'search',
             None,
             self._imap_search_string_lite(self.mail_search_criteria)
         )
         # print(result, data)
         uids_on_server = [int(s) for s in data[0].split()]
+        # print(result, uids_on_server)
         log.info(
-            "{0} matching e-mails found on the server".format(
+            "{0} e-mails matching search criteria were found on the server".format(
                 len(uids_on_server))
         )
 
-        # new_uids = list(set(uids_on_server) - set(logged_uids))
-        # print("new_uids", new_uids)
-
         for uid in uids_on_server:
-            log.info('Getting message {0} :::::::::::::::::::::'.format(uid))
+            log.info('Checking message {0} :::::::::::::::::::::'.format(uid))
 
             result, data = server.uid(
                 'fetch', str(uid), '(RFC822)')  # fetch entire message
+            server.uid
             if data and data[0]:
-                msg = email.message_from_string(data[0][1].decode())
+                try:
+                    msg = email.message_from_string(data[0][1].decode())
 
-                # parse the email here:
-                mail = self._get_first_text_block(msg)
-
-                # log.info(text)
-                # parse_email.go(text.split("\n"))
-                self.mails.append(mail)
+                    # parse the email here:
+                    html_mail = self._get_first_html_block(msg)
+                    if html_mail:
+                        self.mails.append(html_mail)
+                    # text_mail = self._get_first_text_block(msg)
+                    # if text_mail:
+                    #     self.mails.append(text_mail)
+                except:
+                    log.error("\t could not parse messsage")
 
                 # record the uid in the db here
                 # append_uids_to_log([uid])
+            else:
+                print("\t", result, data)
 
         server.logout()
 
